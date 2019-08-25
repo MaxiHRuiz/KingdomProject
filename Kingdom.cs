@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Metodologias1.Kingdom.MockData;
 using Metodologias1.Kingdom.Objects;
-using Metodologias1.Kingdom.Strategies;
+using Metodologias1.Kingdom.TradeStrategies;
 
 namespace Metodologias1.Kingdom
 {

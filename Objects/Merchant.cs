@@ -1,6 +1,6 @@
 ﻿using Metodologias1.Kingdom.Enum;
 using Metodologias1.Kingdom.Interfaces;
-using Metodologias1.Kingdom.Strategies;
+using Metodologias1.Kingdom.TradeStrategies;
 
 namespace Metodologias1.Kingdom.Objects
 {

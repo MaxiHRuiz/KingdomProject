@@ -2,7 +2,7 @@
 using Metodologias1.Kingdom.Interfaces;
 using Metodologias1.Kingdom.Objects;
 
-namespace Metodologias1.Kingdom.Strategies
+namespace Metodologias1.Kingdom.TradeStrategies
 {
     public class NormalTrade : ITradePolicy
     {
