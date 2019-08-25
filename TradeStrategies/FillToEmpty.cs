@@ -7,6 +7,9 @@ namespace Metodologias1.Kingdom.TradeStrategies
 {
     public class FillToEmpty : ITradePolicy
     {
+        public const int DefaultPercentageToEmpty = 5;
+        public const int DefaultPercentageToFill = 95;
+
         public TraderMode MerchantMode { get; set; }
 
         // The carriage will be fill to this percentage.
@@ -19,20 +22,29 @@ namespace Metodologias1.Kingdom.TradeStrategies
 
         public int MaxTransportWeight { get; set; }
 
-        public FillToEmpty(int percentageToFill, int percentageToEmpty, int maxWeight)
+        public FillToEmpty(int maxTransportWeight)
+        {
+            this.PercentageToFill = DefaultPercentageToFill;
+            this.PercentageToEmpty = DefaultPercentageToEmpty;
+            this.CurrentPercentage = 0;
+            this.MaxTransportWeight = maxTransportWeight;
+            this.MerchantMode = TraderMode.Buy;
+        }
+
+        public FillToEmpty(int percentageToFill, int percentageToEmpty, int maxTransportWeight, TraderMode mode)
         {
             this.PercentageToFill = percentageToFill;
             this.PercentageToEmpty = percentageToEmpty;
             this.CurrentPercentage = 0;
-            this.MaxTransportWeight = maxWeight;
-            this.MerchantMode = TraderMode.Buy;
+            this.MaxTransportWeight = maxTransportWeight;
+            this.MerchantMode = mode;
         }
 
         public void Trade(City city, ITransport transport)
         {
-            foreach (var merchandise in city.DemandList)
+            if (this.MerchantMode.Equals(TraderMode.Sell))
             {
-                if (this.MerchantMode.Equals(TraderMode.Sell))
+                foreach (var merchandise in city.DemandList)
                 {
                     var percentageWithOutMerchandise = this.CurrentPercentage - (merchandise.GetWeight() * 100 / this.MaxTransportWeight);
                     if (transport.HaveIt(merchandise) && percentageWithOutMerchandise >= this.PercentageToEmpty)
@@ -40,20 +52,12 @@ namespace Metodologias1.Kingdom.TradeStrategies
                         this.CurrentPercentage = percentageWithOutMerchandise;
                         transport.Down(merchandise);
                     }
-                    else if (merchandise != city.SupplyList.Last())
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        this.MerchantMode = TraderMode.Buy;
-                    }
                 }
             }
 
-            foreach (var merchandise in city.SupplyList)
+            if (this.MerchantMode.Equals(TraderMode.Buy))
             {
-                if (this.MerchantMode.Equals(TraderMode.Buy))
+                foreach (var merchandise in city.SupplyList)
                 {
                     var percentageWithMerchandise = this.CurrentPercentage + (merchandise.GetWeight() * 100 / this.MaxTransportWeight);
                     if (!transport.HaveIt(merchandise) && percentageWithMerchandise <= this.PercentageToFill)
@@ -61,15 +65,7 @@ namespace Metodologias1.Kingdom.TradeStrategies
                         this.CurrentPercentage = percentageWithMerchandise;
                         transport.Up(merchandise);
                     }
-                    else if (merchandise != city.SupplyList.Last())
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        this.MerchantMode = TraderMode.Sell;
-                    }
-                }                
+                }
             }
         }
     }
