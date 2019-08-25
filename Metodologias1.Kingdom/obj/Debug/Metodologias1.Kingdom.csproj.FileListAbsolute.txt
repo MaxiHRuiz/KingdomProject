@@ -1,0 +1,7 @@
+C:\Users\xCrixus\source\repos\Metodologias1.Kingdom\Metodologias1.Kingdom\bin\Debug\Metodologias1.Kingdom.exe.config
+C:\Users\xCrixus\source\repos\Metodologias1.Kingdom\Metodologias1.Kingdom\bin\Debug\Metodologias1.Kingdom.exe
+C:\Users\xCrixus\source\repos\Metodologias1.Kingdom\Metodologias1.Kingdom\bin\Debug\Metodologias1.Kingdom.pdb
+C:\Users\xCrixus\source\repos\Metodologias1.Kingdom\Metodologias1.Kingdom\obj\Debug\Metodologias1.Kingdom.csprojAssemblyReference.cache
+C:\Users\xCrixus\source\repos\Metodologias1.Kingdom\Metodologias1.Kingdom\obj\Debug\Metodologias1.Kingdom.csproj.CoreCompileInputs.cache
+C:\Users\xCrixus\source\repos\Metodologias1.Kingdom\Metodologias1.Kingdom\obj\Debug\Metodologias1.Kingdom.exe
+C:\Users\xCrixus\source\repos\Metodologias1.Kingdom\Metodologias1.Kingdom\obj\Debug\Metodologias1.Kingdom.pdb
