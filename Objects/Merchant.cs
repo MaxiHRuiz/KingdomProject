@@ -8,7 +8,9 @@ namespace Metodologias1.Kingdom.Objects
     {
         // Two states: Sell or Buy
         public TraderMode Mode { get; set; }
+
         public ITransport Transport { get; set; }
+
         public ITradePolicy TradePolicy { get; set; }
 
         public Merchant(ITransport transport, ITradePolicy tradePolicy = null)
@@ -17,14 +19,14 @@ namespace Metodologias1.Kingdom.Objects
             this.TradePolicy = tradePolicy ?? new NormalTrade();
         }
 
-        public void BuySupplies(Distribuitor route)
+        public void Trade(City city)
         {
-            this.TradePolicy.BuySupplies(route, this.Transport);
+            city.Trade(this.Transport);
         }
 
-        public void SellSupplies(Distribuitor route)
+        public void ChangeTradePolicy(ITradePolicy tradePolicy)
         {
-            this.TradePolicy.SellSupplies(route, this.Transport);
+            this.TradePolicy = tradePolicy;
         }
     }
 }

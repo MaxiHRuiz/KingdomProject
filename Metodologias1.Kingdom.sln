@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28307.489
+VisualStudioVersion = 15.0.28307.779
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metodologias1.Kingdom", "Metodologias1.Kingdom\Metodologias1.Kingdom.csproj", "{1DDC03A6-465A-4A26-87CD-A66A1E4B3E21}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metodologias1.Kingdom", "Metodologias1.Kingdom.csproj", "{1DDC03A6-465A-4A26-87CD-A66A1E4B3E21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {91CD72C0-9965-4F92-9881-121BE22DC086}
+		SolutionGuid = {20489689-95B9-4B72-8DE4-F30DC1FE0F44}
 	EndGlobalSection
 EndGlobal

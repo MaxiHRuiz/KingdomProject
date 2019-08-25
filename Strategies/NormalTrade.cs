@@ -6,24 +6,21 @@ namespace Metodologias1.Kingdom.Strategies
 {
     public class NormalTrade : ITradePolicy
     {
-        public void BuySupplies(Distribuitor route, ITransport transport)
+        public void Trade(City city, ITransport transport)
         {
-            foreach (var supply in route.Supplies)
+            foreach (var merchandise in city.DemandList)
             {
-                if (transport.IsThereSpace(supply))
+                if (transport.HaveIt(merchandise))
                 {
-                    transport.Up(supply);
+                    transport.Down(merchandise);
                 }
             }
-        }
 
-        public void SellSupplies(Distribuitor distribuitor, ITransport transport)
-        {
-            foreach (var supply in distribuitor.Supplies)
+            foreach (var merchandise in city.SupplyList)
             {
-                if (transport.HaveIt(supply))
+                if (transport.IsThereSpace(merchandise))
                 {
-                    transport.Down(supply);
+                    transport.Up(merchandise);
                 }
             }
         }

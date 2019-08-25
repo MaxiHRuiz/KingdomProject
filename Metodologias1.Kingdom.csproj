@@ -49,10 +49,11 @@
     <Compile Include="Interfaces\ITradePolicy.cs" />
     <Compile Include="Interfaces\ITransport.cs" />
     <Compile Include="Kingdom.cs" />
+    <Compile Include="MockData\PackageListMock.cs" />
     <Compile Include="Objects\City.cs" />
     <Compile Include="Objects\Merchant.cs" />
-    <Compile Include="Objects\Distribuitor.cs" />
-    <Compile Include="Strategies\LittleofMuch.cs" />
+    <Compile Include="Objects\Route.cs" />
+    <Compile Include="Strategies\LittleOfMuch.cs" />
     <Compile Include="Strategies\NormalTrade.cs" />
     <Compile Include="Objects\Package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

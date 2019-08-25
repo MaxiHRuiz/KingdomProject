@@ -28,7 +28,6 @@ namespace Metodologias1.Kingdom.Objects
 
         public void Down(IMerchandise merchandise)
         {
-            //this.Merchandise.RemoveAt(this.Merchandise.FindIndex(x => x.GetWeight() == merchandise.GetWeight()));
             foreach (var merch in Merchandise)
             {
                 if (merch.GetWeight() == merchandise.GetWeight())
