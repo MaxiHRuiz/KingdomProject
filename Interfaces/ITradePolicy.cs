@@ -4,6 +4,6 @@ namespace Metodologias1.Kingdom.Interfaces
 {
     public interface ITradePolicy
     {
-        void Trade(City place, ITransport transport);
+        void Trade(City city, ITransport transport);
     }
 }

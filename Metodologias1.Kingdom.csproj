@@ -53,8 +53,9 @@
     <Compile Include="Objects\City.cs" />
     <Compile Include="Objects\Merchant.cs" />
     <Compile Include="Objects\Route.cs" />
-    <Compile Include="Strategies\LittleOfMuch.cs" />
-    <Compile Include="Strategies\NormalTrade.cs" />
+    <Compile Include="TradeStrategies\FillToEmpty.cs" />
+    <Compile Include="TradeStrategies\LittleOfMuch.cs" />
+    <Compile Include="TradeStrategies\NormalTrade.cs" />
     <Compile Include="Objects\Package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Objects\Wagon.cs" />
