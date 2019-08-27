@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Metodologias1.Kingdom.Enum;
 using Metodologias1.Kingdom.Interfaces;
+using Metodologias1.Kingdom.TradeStrategies;
 
 namespace Metodologias1.Kingdom.Objects
 {
@@ -14,29 +16,23 @@ namespace Metodologias1.Kingdom.Objects
 
         public List<IMerchandise> Merchandise { get; set; }
 
-        public Wagon(int weight)
+        public ITradePolicy TradePolicy { get; set; }
+
+        public Wagon(int weight, TradeStrategyMode? strategyMode = null)
         {
             this.TotalWeight = weight;
             this.Merchandise = new List<IMerchandise>();
+            ChangeTradePolicy(strategyMode);
         }
 
         public void Up(IMerchandise merchandise)
         {
-            Merchandise.Add(merchandise);
-            WeightCarried += merchandise.GetWeight();
+            TradePolicy.Up(this, merchandise);
         }
 
         public void Down(IMerchandise merchandise)
         {
-            foreach (var merch in Merchandise)
-            {
-                if (merch.GetWeight() == merchandise.GetWeight())
-                {
-                    Merchandise.Remove(merch);
-                    WeightCarried -= merch.GetWeight();
-                    break;
-                }
-            }
+            TradePolicy.Down(this, merchandise);
         }
 
         public bool HaveIt(IMerchandise merchandise)
@@ -47,6 +43,25 @@ namespace Metodologias1.Kingdom.Objects
         public bool IsThereSpace(IMerchandise merchandise)
         {
             return ((WeightCarried + merchandise.GetWeight()) < TotalWeight);
+        }
+
+        public void ChangeTradePolicy(TradeStrategyMode? strategyMode)
+        {
+            switch (strategyMode)
+            {
+                case TradeStrategyMode.Normal:
+                    this.TradePolicy = new NormalTrade();
+                    break;
+                case TradeStrategyMode.FillToEmpty:
+                    this.TradePolicy = new FillToEmpty();
+                    break;
+                case TradeStrategyMode.LitteOfMuch:
+                    this.TradePolicy = new LittleOfMuch();
+                    break;
+                default:
+                    this.TradePolicy = new NormalTrade();
+                    break;
+            }
         }
     }
 }

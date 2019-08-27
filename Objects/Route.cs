@@ -17,7 +17,7 @@ namespace Metodologias1.Kingdom.Objects
         {
             foreach (var city in CityList)
             {
-                Merchant.TradePolicy.Trade(city, Merchant.Transport);
+                city.Trade(Merchant.Transport);
             }
         }
     }
