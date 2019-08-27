@@ -1,4 +1,5 @@
-﻿using Metodologias1.Kingdom.Interfaces;
+﻿using System.Linq;
+using Metodologias1.Kingdom.Interfaces;
 using Metodologias1.Kingdom.Objects;
 
 namespace Metodologias1.Kingdom.TradeStrategies
@@ -9,38 +10,32 @@ namespace Metodologias1.Kingdom.TradeStrategies
 
         public bool IsOverweightPackage { get; set; }
 
-        public LittleOfMuch(int maxWeightPackage)
+        public LittleOfMuch(int maxWeightPackage = 40)
         {
             this.PackageMaxWeight = maxWeightPackage;
         }
 
-        public void Trade(City city, ITransport transport)
+        public void Up(Wagon wagon, IMerchandise merchandise)
         {
-            foreach (var merchandise in city.DemandList)
+            if (merchandise.GetWeight() < this.PackageMaxWeight)
             {
-                if (transport.HaveIt(merchandise))
-                {
-                    if (merchandise.GetWeight() >= this.PackageMaxWeight && this.IsOverweightPackage)
-                    {
-                        this.IsOverweightPackage = false;
-                    }
+                wagon.Merchandise.Add(merchandise);
+            }
+            else if (!this.IsOverweightPackage)
+            {
+                this.IsOverweightPackage = true;
+                wagon.Merchandise.Add(merchandise);
+            }
+        }
 
-                    transport.Down(merchandise);
-                }
+        public void Down(Wagon wagon, IMerchandise merchandise)
+        {
+            if (this.IsOverweightPackage)
+            {
+                this.IsOverweightPackage = false;
             }
 
-            foreach (var merchandise in city.SupplyList)
-            {
-                if (merchandise.GetWeight() < this.PackageMaxWeight && transport.IsThereSpace(merchandise))
-                {
-                    transport.Up(merchandise);
-                }
-                else if (!this.IsOverweightPackage && transport.IsThereSpace(merchandise))
-                {
-                    this.IsOverweightPackage = true;
-                    transport.Up(merchandise);
-                }
-            }
+            wagon.Merchandise.RemoveAt(wagon.Merchandise.FindIndex(x => x.GetWeight() == merchandise.GetWeight()));
         }
     }
 }

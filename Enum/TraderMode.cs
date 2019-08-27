@@ -2,7 +2,7 @@
 {
     public enum TraderMode
     {
-        Sell = 01,
-        Buy = 02,
+        Sell,
+        Buy,
     }
 }

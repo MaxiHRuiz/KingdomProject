@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Metodologias1.Kingdom.Enum;
+﻿using Metodologias1.Kingdom.Enum;
 using Metodologias1.Kingdom.Interfaces;
 using Metodologias1.Kingdom.Objects;
 
@@ -22,12 +21,12 @@ namespace Metodologias1.Kingdom.TradeStrategies
 
         public int MaxTransportWeight { get; set; }
 
-        public FillToEmpty(int maxTransportWeight)
+        public FillToEmpty(int maxTransportWeight = 500)
         {
+            this.MaxTransportWeight = maxTransportWeight;
             this.PercentageToFill = DefaultPercentageToFill;
             this.PercentageToEmpty = DefaultPercentageToEmpty;
             this.CurrentPercentage = 0;
-            this.MaxTransportWeight = maxTransportWeight;
             this.MerchantMode = TraderMode.Buy;
         }
 
@@ -40,31 +39,28 @@ namespace Metodologias1.Kingdom.TradeStrategies
             this.MerchantMode = mode;
         }
 
-        public void Trade(City city, ITransport transport)
+        public void Up(Wagon wagon, IMerchandise merchandise)
+        {
+            if (this.MerchantMode.Equals(TraderMode.Buy))
+            {
+                var percentageWithMerchandise = this.CurrentPercentage + (merchandise.GetWeight() * 100 / this.MaxTransportWeight);
+                if (percentageWithMerchandise <= this.PercentageToFill)
+                {
+                    this.CurrentPercentage = percentageWithMerchandise;
+                    wagon.Merchandise.Add(merchandise);
+                }
+            }
+        }
+
+        public void Down(Wagon wagon, IMerchandise merchandise)
         {
             if (this.MerchantMode.Equals(TraderMode.Sell))
             {
-                foreach (var merchandise in city.DemandList)
+                var percentageWithOutMerchandise = this.CurrentPercentage - (merchandise.GetWeight() * 100 / this.MaxTransportWeight);
+                if (percentageWithOutMerchandise >= this.PercentageToEmpty)
                 {
-                    var percentageWithOutMerchandise = this.CurrentPercentage - (merchandise.GetWeight() * 100 / this.MaxTransportWeight);
-                    if (transport.HaveIt(merchandise) && percentageWithOutMerchandise >= this.PercentageToEmpty)
-                    {
-                        this.CurrentPercentage = percentageWithOutMerchandise;
-                        transport.Down(merchandise);
-                    }
-                }
-            }
-
-            if (this.MerchantMode.Equals(TraderMode.Buy))
-            {
-                foreach (var merchandise in city.SupplyList)
-                {
-                    var percentageWithMerchandise = this.CurrentPercentage + (merchandise.GetWeight() * 100 / this.MaxTransportWeight);
-                    if (!transport.HaveIt(merchandise) && percentageWithMerchandise <= this.PercentageToFill)
-                    {
-                        this.CurrentPercentage = percentageWithMerchandise;
-                        transport.Up(merchandise);
-                    }
+                    this.CurrentPercentage = percentageWithOutMerchandise;
+                    wagon.Merchandise.Remove(merchandise);
                 }
             }
         }

@@ -1,6 +1,5 @@
 ﻿using Metodologias1.Kingdom.Enum;
 using Metodologias1.Kingdom.Interfaces;
-using Metodologias1.Kingdom.TradeStrategies;
 
 namespace Metodologias1.Kingdom.Objects
 {
@@ -11,22 +10,9 @@ namespace Metodologias1.Kingdom.Objects
 
         public ITransport Transport { get; set; }
 
-        public ITradePolicy TradePolicy { get; set; }
-
-        public Merchant(ITransport transport, ITradePolicy tradePolicy = null)
+        public Merchant(ITransport transport)
         {
             this.Transport = transport;
-            this.TradePolicy = tradePolicy ?? new NormalTrade();
-        }
-
-        public void Trade(City city)
-        {
-            city.Trade(this.Transport);
-        }
-
-        public void ChangeTradePolicy(ITradePolicy tradePolicy)
-        {
-            this.TradePolicy = tradePolicy;
         }
     }
 }
