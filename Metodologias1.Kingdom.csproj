@@ -47,7 +47,7 @@
     <Compile Include="Enum\TradeStrategyMode.cs" />
     <Compile Include="Interfaces\IPlace.cs" />
     <Compile Include="Interfaces\IMerchandise.cs" />
-    <Compile Include="Interfaces\TradePolicy.cs" />
+    <Compile Include="Interfaces\ITradePolicy.cs" />
     <Compile Include="Interfaces\ITransport.cs" />
     <Compile Include="Kingdom.cs" />
     <Compile Include="MockData\PackageListMock.cs" />
